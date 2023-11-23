@@ -1,6 +1,7 @@
-import useStore from "../store/navStore"
+import useNavStore from "../store/navStore"
+import LoginButton from "./navbar/loginButton"
 export default function NavbarCollapse() {
-    const { collapse } = useStore()
+    const { collapse } = useNavStore()
     return (
         <div className="bg-nav">
             <div className="NavbarCollapse">
@@ -26,13 +27,10 @@ export default function NavbarCollapse() {
                         <a className="nav-link" href="#"><i className="bi bi-shop" />Locales Comerciales</a>
                     </li>
                     <li>
-                        <button className="btn btn-warning mt-4" type="submit">
-                            <i className="bi arrow-right-circle-fill"></i> Iniciar Sesion
-                        </button>
+                        <LoginButton/>
                     </li>
                 </ul>
             </div>
-
         </div>
     )
 }

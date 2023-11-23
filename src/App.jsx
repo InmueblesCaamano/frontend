@@ -1,26 +1,40 @@
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import NavBar from "./components/navBar"
-import Router from "./router"
+import '../node_modules/bootstrap-icons/font/bootstrap-icons.css'
 import './css/index.css'
-function App() {
+import NavBar from "./components/navbar/navBar"
+import Router from "./router"
+import Notifications from './components/notifications'
+import WhatsappButton from './components/whatsappBotton'
+import useSessionStore from './store/sesionStore'
+import { useEffect } from 'react'
+import Loading from './components/loading'
+/* import useNotificationStore from './store/notificationStore' */
+const App = () => {
+  /*   const {setNotification} = useNotificationStore() */
+  const { setSession } = useSessionStore()
+
+  const getSession = () => {
+    const localStorageUser = localStorage.getItem('user')
+    if (localStorageUser) {
+      setSession(true)
+    }
+  }
+
+  useEffect(() => {
+    getSession()
+  }, [])
+
   return (
     <>
-      <a href='#' onClick={()=> window.open('https://wa.me/04248261631', '_blank')} className='ws-button'>
-        <img  className='ws-img-btn' src='./img/logo-ws.svg' width={40} height={40} alt='ws' />
-      </a>
+      <Loading />
+      {/* {session ? <> session </> : <>no session</>} */}
       <NavBar />
       <Router />
+      <Notifications />
+      <WhatsappButton />
+      {/* <button onClick={()=>setNotification("Prueba de notificacion")}> encender notificacion </button> */}
     </>
   )
 }
 export default App
 
-/* 
-import useUsers from "./hooks/useUsers"
-const { users } = useUsers()
-console.log('App: ', users) */
-
-{/* hola
-      {users && users.map((user, index) => {
-        return (<div key={index}> {user.name} </div>)
-      })} */}

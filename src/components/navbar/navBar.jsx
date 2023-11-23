@@ -1,22 +1,22 @@
-import NavbarCollapse from "./navbarCollapse"
-import navScroll from "../hooks/navScroll"
-import useStore from "../store/navStore"
+import NavbarCollapse from "../navbarCollapse"
+import navScroll from "../../hooks/navScroll"
+import useNavStore from "../../store/navStore"
 import { Link } from "react-router-dom"
-
+import LogoRounded from "../logoRounded"
+import LoginButton from "./loginButton"
 export default function NavBar() {
 
-    const { isCollapsed, collapse } = useStore()
+    const { isCollapsed, expand } = useNavStore()
     const { scroll } = navScroll()
 
     return (<div >
         {!isCollapsed && <NavbarCollapse />}
-        <nav className={`navbar navbar-expand-lg navbar-dark navPosition ${scroll && 'bg-dark'}`} >
+        <nav className={`navbar navbar-expand-lg navbar-dark navPosition  ${scroll && 'bg-dark'}`} >
             <div className="container-fluid">
-                <Link className="navbar-brand" href="/">
-                    <img src='./img/logo.png' width={50} height={50} alt="Picture of the author">
-                    </img>
+                <Link className="navbar-brand" to="/">
+                    <LogoRounded width={"50"} height={"50"} />
                 </Link>
-                <button onClick={collapse} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button onClick={expand} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -42,9 +42,7 @@ export default function NavBar() {
                             <a className="nav-link" href="#"><i className="bi bi-shop" />Locales Comerciales</a>
                         </li>
                     </ul>
-                    <Link to='/login'>
-                        <button className="btn btn-warning" type="submit"> <i className="bi arrow-right-circle-fill"></i> Iniciar Sesion</button>
-                    </Link>
+                    <LoginButton />
                 </div>
             </div>
         </nav>

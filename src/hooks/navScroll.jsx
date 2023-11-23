@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState,useEffect } from "react"
 export default function navScroll() {
+    
     const [scroll, setScroll] = useState(false);
 
     useEffect(() => {

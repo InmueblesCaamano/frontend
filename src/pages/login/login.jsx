@@ -1,21 +1,26 @@
 import { Link } from "react-router-dom";
+import LogoRounded from "../../components/logoRounded";
+import useLogin from "../../hooks/useLogin";
+import useLoadingStore from "../../store/loadingStore";
 export default function Login() {
+    const { login } = useLogin()
+    const { loading } = useLoadingStore()
     return (<>
         <div className='container-fluid bg-dark py-5 vh-100'>
             <div className='row'>
-                <div className='col-md-4 offset-4'>
+                <div className='col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 '>
                     <div className='p-5 radius-5 mt-5'>
-                        <div className='text-center'>
-                            <img src='./img/logo2.svg' className='logo-nav' alt='logo caamano inmuebles' />
+                        <div className="d-flex justify-content-center">
+                            <LogoRounded width={150} height={150} />
                         </div>
                         <h1 className='text-light'>Iniciar sesión</h1>
-                        <form>
-                            <input className='form-control mt-4' type="text" placeholder="Correo electrónico" />
-                            <input className='form-control mt-4' type="password" placeholder="Contraseña" />
-                            <button className='btn btn-primary mt-4' >Iniciar sesión</button>
+                        <form onSubmit={(e) => login(e)}>
+                            <input defaultValue={'m@gmail.com'} required name="email" id="email" className='form-control mt-4' type="email" placeholder="Correo electrónico" />
+                            <input defaultValue={'123'} required name="password" id="password" className='form-control mt-4' type="password" placeholder="Contraseña" />
+                            {loading ? <>cargando</> :<button className='btn btn-primary mt-4' >Iniciar sesión</button>}
                         </form>
                         <div className='text-warning text-center pt-4'>
-                            Aun no tienes una cuenta? 
+                            Aun no tienes una cuenta?
                             <Link to="/registro" className='text-warning mx-2'>
                                 Registrate
                             </Link>
