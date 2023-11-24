@@ -21,13 +21,13 @@ const useLogin = () => {
         }
 
         const body = { email, password }
-        const res = await request({ url: `${ApiUrl}/users/login`, method: 'POST', body })
-        console.log(res)
+        const url = `${ApiUrl}/users/login`
+        const res = await request.post(url, body)
         if (res.status) {
             localStorage.setItem('user', JSON.stringify(res.body))
             setLoading(false)
             setSession(true)
-            if(res.body.level === 999){
+            if (res.body.level === 999) {
                 navigate('/dashboard')
                 return
             }

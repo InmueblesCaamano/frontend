@@ -336,3 +336,17 @@ p {
   justify-content: center;
   align-items: center;
 }
+
+.body-admin-modal{
+  background-color: rgb(255, 255, 255);
+  padding: 30px 60px;
+  border-radius: 5px;
+}
+.input-border{
+  border: 2px solid rgb(67, 67, 67);
+}
+
+.body-admin-modal-delete{
+  padding: 30px 60px;
+  border-radius: 5px;
+}

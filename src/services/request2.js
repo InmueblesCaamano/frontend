@@ -9,9 +9,6 @@ const request = {
         })
         const response = await res.json()
         return response
-        /* .then(res => res.json())
-        .then(res => res)
-        .catch(error => error) */
     },
     get: async function (url) {
         fetch(url, {
@@ -23,19 +20,17 @@ const request = {
             .then(res => res.json())
             .then(res => res)
             .catch(error => error)
-
     },
-    put: async function (url, body) {
-        fetch(url, {
+    put: async function (url, body={}) {
+        const res = await fetch(url, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(body)
         })
-            .then(res => res.json())
-            .then(res => res)
-            .catch(error => error)
+        const response = await res.json()
+        return response
     }
 }
 export default request

@@ -1,0 +1,19 @@
+.inmuebles-body{
+    background-color: rgb(205, 205, 205);
+    min-height: 100vh;
+}
+.btn-agregar-inmueble{
+    border: 2px dotted rgb(70, 70, 70);
+    color: rgb(70, 70, 70);
+    border-radius: 6px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.btn-agregar-inmueble:hover{
+    cursor: pointer;
+    background-color: rgba(83, 223, 101, 0.5);
+}
+.btn-agregar-inmueble h1{
+    padding:0px;
+    margin: 0px;
+}

@@ -4,7 +4,7 @@ import { ApiUrl } from "../services/apiurl"
 import useLoadingStore from "../store/loadingStore"
 import { useNavigate } from "react-router-dom"
 import useSessionStore from "../store/sesionStore"
-import request from "../services/request2"
+import request from "../services/request"
 const useRegister = () => {
     const navigate = useNavigate()
     const { setSession } = useSessionStore()

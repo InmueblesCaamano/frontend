@@ -1,7 +1,16 @@
+import AdminModal from '../../components/modals/adminModal'
 import useUsers from '../../hooks/useUsers'
+import DeleteUserModal from '../../components/modals/deleteUserModal'
 const Usuarios = () => {
-    const { users } = useUsers()
-    return (<div>
+
+    const { users, makeAdmin, userToDelete, modalDeleteUser,
+        adminModal, userAdmin, setAdminModal, sendAdminModify,
+        adminLevel, deleteUser,setModalDeleteUser,sendDeleteUser } = useUsers()
+
+    return (<div className='p-2'>
+
+        {modalDeleteUser && <DeleteUserModal sendDeleteUser={sendDeleteUser} setModalDeleteUser={setModalDeleteUser} user={userToDelete} />}
+        {adminModal && <AdminModal sendAdminModify={sendAdminModify} user={userAdmin} setAdminModal={setAdminModal} adminLevel={adminLevel} />}
         <h4> usuarios </h4>
 
         <table className='table'>
@@ -21,11 +30,14 @@ const Usuarios = () => {
                         <td>{user.email}</td>
                         <td>{user.phone}</td>
                         <td>{user.level === 999 ?
-                            <div className='bg-warning text-center p-2' > Admin </div> :
-                            <button> hacer admin </button>} 
+                            <button className='btn btn-warning bg-warning w-100' onClick={() => makeAdmin(user, 1)} > Admin </button>
+                            :
+                            <button className='btn btn-default border border-dark w-100' onClick={() => makeAdmin(user, 999)} > hacer admin </button>
+                        }
+
                         </td>
                         <td>
-                            <button className='btn btn-success'> Guardar </button>
+                            <button onClick={() => deleteUser(user)} className='btn btn-danger'> <i className='bi bi-x' /> </button>
                         </td>
                     </tr>)
                 })}
@@ -34,11 +46,3 @@ const Usuarios = () => {
     </div >)
 }
 export default Usuarios
-
-/* 
-
-
-*/
-
-{/* hola
-       */}
