@@ -8,7 +8,10 @@ const useSessionStore = createWithEqualityFn((set) => ({
         } else {
             throw new Error('session store is not boolean')
         }
-    })
+    }),
+    user: {},
+    setUser: (newUser) => set(() => ({ user: newUser })),
+
 }))
 
 export default useSessionStore

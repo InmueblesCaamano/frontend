@@ -38,13 +38,14 @@ const useUsers = () => {
         setUserAdmin(user)
     }
 
-    const sendAdminModify = async (e, _adminLevel) => {
-        e.preventDefault()
+    const sendAdminModify = async (_adminLevel) => {
+
         setLoading(true)
-        const pass = e.target.password.value
+        const token = (JSON.parse(localStorage.getItem('user'))).token
         const id = userAdmin._id
-        if (!pass || !id) return alert('Ocurrio un error, por favor recargue la pagina')
-        const url = ApiUrl + '/users/' + id + '/' + pass + '/' + _adminLevel
+        if (!token) return alert('Used no se encuentra autorizado para realizar esta accion, por favor contacte a su proveedor de servicio.')
+        if (!id) return alert('Ocurrio un error, por favor intente loguearse nuevamente.')
+        const url = ApiUrl + '/users/' + id + '/' + token + '/' + _adminLevel
         const res = await request.put(url)
         if (!res.status) {
             setLoading(false)

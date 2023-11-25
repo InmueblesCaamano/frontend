@@ -11,12 +11,14 @@ import Loading from './components/loading'
 /* import useNotificationStore from './store/notificationStore' */
 const App = () => {
   /*   const {setNotification} = useNotificationStore() */
-  const { setSession } = useSessionStore()
+  const { setSession,setUser } = useSessionStore()
 
   const getSession = () => {
     const localStorageUser = localStorage.getItem('user')
     if (localStorageUser) {
       setSession(true)
+      const user = JSON.parse(localStorageUser)
+      setUser(user)
     }
   }
 

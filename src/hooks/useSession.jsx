@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import useSessionStore from "../store/sesionStore"
 const useSession = () => {
     const navigate = useNavigate()
-    const { session, setSession } = useSessionStore()
+    const { session, setSession,setUser } = useSessionStore()
 
     const closeSession = () => {
         localStorage.removeItem("user")
@@ -12,7 +12,7 @@ const useSession = () => {
 
     return {
         closeSession,
-        session, setSession
+        session, setSession,setUser
     }
 }
 export default useSession

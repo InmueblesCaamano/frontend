@@ -4,21 +4,18 @@ const AdminModal = ({user,setAdminModal,sendAdminModify,adminLevel}) => {
         <div className="background-notification">
             <div className="body-admin-modal">
                 <p>
-                    Ingrese su clave para continuar
+                    Esta estableciendo al siguiente usuario como administrador
                 </p>
-                <div>
-                    usuario: {user.name}
-                </div>
+                <h2>
+                     {user.name}
+                </h2>
                 <div>
                     Id: {user._id}
                 </div>
-                <form onSubmit={(e)=>sendAdminModify(e,adminLevel)} className="d-flex mt-4 mb-4">
-                    <input name="password" placeholder="ingrese su clave" required type="password" className="form-control mx-2 input-border" />
-                    <button  className="btn btn-primary"> Aceptar </button>
-                </form>
                 <hr />
                 <div className="text-center">
-                    <button onClick={()=>setAdminModal(false)}  className="btn btn-danger mt-2"> <i className="bi bi-x"/> Cancelar</button>
+                    <button onClick={()=>sendAdminModify(adminLevel)} className="btn btn-primary mx-2"> Aceptar </button>
+                    <button onClick={()=>setAdminModal(false)}  className="btn btn-danger mx-2"> <i className="bi bi-x"/> Cancelar</button>
                 </div>
             </div>
         </div>

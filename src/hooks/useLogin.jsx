@@ -5,7 +5,7 @@ import useLoadingStore from "../store/loadingStore"
 import useNotificationStore from "../store/notificationStore"
 import useSession from "./useSession"
 const useLogin = () => {
-    const { setSession } = useSession()
+    const { setSession,setUser } = useSession()
     const navigate = useNavigate()
     const { setNotification } = useNotificationStore()
     const { setLoading } = useLoadingStore()
@@ -23,11 +23,15 @@ const useLogin = () => {
         const body = { email, password }
         const url = `${ApiUrl}/users/login`
         const res = await request.post(url, body)
+
+        const user = res.body
         if (res.status) {
-            localStorage.setItem('user', JSON.stringify(res.body))
+            localStorage.setItem('user', JSON.stringify(user))
             setLoading(false)
             setSession(true)
-            if (res.body.level === 999) {
+            setUser(user)
+            if (user.level === 999) {
+                
                 navigate('/dashboard')
                 return
             }
