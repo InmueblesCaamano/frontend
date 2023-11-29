@@ -9,6 +9,7 @@ const useLogin = () => {
     const navigate = useNavigate()
     const { setNotification } = useNotificationStore()
     const { setLoading } = useLoadingStore()
+   
     const login = async (e) => {
         setLoading(true)
         e.preventDefault()
@@ -31,7 +32,6 @@ const useLogin = () => {
             setSession(true)
             setUser(user)
             if (user.level === 999) {
-                
                 navigate('/dashboard')
                 return
             }

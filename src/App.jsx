@@ -5,36 +5,20 @@ import NavBar from "./components/navbar/navBar"
 import Router from "./router"
 import Notifications from './components/notifications'
 import WhatsappButton from './components/whatsappBotton'
-import useSessionStore from './store/sesionStore'
 import { useEffect } from 'react'
 import Loading from './components/loading'
-/* import useNotificationStore from './store/notificationStore' */
+import useInitApp from './hooks/useInitApp'
 const App = () => {
-  /*   const {setNotification} = useNotificationStore() */
-  const { setSession,setUser } = useSessionStore()
-
-  const getSession = () => {
-    const localStorageUser = localStorage.getItem('user')
-    if (localStorageUser) {
-      setSession(true)
-      const user = JSON.parse(localStorageUser)
-      setUser(user)
-    }
-  }
-
-  useEffect(() => {
-    getSession()
-  }, [])
-
+  const initApp = useInitApp()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { initApp(); console.log('Iniciando aplicacion') }, [])
   return (
     <>
       <Loading />
-      {/* {session ? <> session </> : <>no session</>} */}
       <NavBar />
       <Router />
       <Notifications />
       <WhatsappButton />
-      {/* <button onClick={()=>setNotification("Prueba de notificacion")}> encender notificacion </button> */}
     </>
   )
 }

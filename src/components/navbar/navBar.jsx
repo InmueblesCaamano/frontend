@@ -25,23 +25,28 @@ export default function NavBar() {
                     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                         <li className="nav-item">
 
-                            <Link to='/filter' className="nav-link" aria-current="page">
+                            <Link to='/propiedades/casa' className="nav-link" aria-current="page">
                                 <i className="bi bi-house" />   Casas
                             </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
+                        <Link to='/propiedades/apartamento' className="nav-link" aria-current="page">
                                 <i className="bi bi-building" /> Apartamentos
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="bi bi-buildings" /> TomHouse</a>
+                        <Link to='/propiedades/tomhouse' className="nav-link" aria-current="page">
+                                <i className="bi bi-buildings" /> TomHouse
+                                </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="bi bi-pin-map" />Terrenos</a>
+                        <Link to='/propiedades/terreno' className="nav-link" aria-current="page">
+                                <i className="bi bi-pin-map" />Terrenos
+                                </Link>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#"><i className="bi bi-shop" />Locales Comerciales</a>
+                        <Link to='/propiedades/local' className="nav-link" aria-current="page">
+                            <i className="bi bi-shop" /> Locales</Link>
                         </li>
                     </ul>
                     {user.level === 999 &&

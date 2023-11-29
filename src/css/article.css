@@ -7,9 +7,12 @@
     box-shadow: 8px 8px 8px 8px rgba(117, 117, 117, 0.514);
     border-radius: 5px;
 }
+.bgArticle:hover{
+    cursor: pointer;
+}
 
 .articleImage {
-    height: 200px;
+    height: 230px;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     position: relative;
@@ -26,7 +29,7 @@
     position: absolute;
     width: 100%;
     top: 0px;
-    height: 200px;
+    height: 100%;
 }
 .img-article {
     height: 100%;

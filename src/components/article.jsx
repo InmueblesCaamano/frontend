@@ -1,56 +1,60 @@
+/* eslint-disable react/prop-types */
 import '../css/article.css'
-export default function Article() {
-    return (
-        <div className='col-12 col-md-6 col-lg-4 mb-4 article-container'>
-            <div className="bgArticle pb-3">
-                <div className='card-article'>
-                    <div className='articleImage'>
-                        <img src="./img/bg.webp" className='img-article' alt="" />
-                        <div className='fondo' />
-                        <div className="tittle-article">
-                            San Juan Bautista
-                        </div>
+import { useNavigate } from 'react-router-dom'
+export default function Article({ item }) {
+    const navigate = useNavigate()
+    return (<>
+        <div onClick={() => navigate('/detallado/' + item._id)} className="bgArticle pb-3">
+            <div className='card-article'>
+                <div className='articleImage'>
+                    {/* {item && item.images.lenght > 0 && console.log(item._id, ' - ',item.images[0].filename)} */}
+                    {item ? <>
+                        <img src={ '../files/'+item.images[0].filename} className='img-article' alt="" />
+                    </> : <> No image </>}
+                    <div className='fondo' />
+                    <div className="tittle-article">
+                        {item.parroquias}, {item.tipo}
                     </div>
                 </div>
-                <div className="container-fluid">
-                    <div className="row pt-2">
-                        <div className="col-4">
-                            <div className="bg-dark-transparent text-light text-mini text-center rounded p-1">
-                                En Venta
-                            </div>
-                            <div className='text-center'>
-                                <div className="price">$68.000 </div>
-                            </div>
+            </div>
+           <div className="container-fluid">
+                <div className="row pt-2">
+                    <div className="col-4">
+                        <div className="bg-dark-transparent text-light text-mini text-center rounded p-1">
+                            {item.ventaOAlquiler}
                         </div>
-                        <div className="col-2 icon-article">
-                            <i className="bi bi-door-closed  icono" />
-                            <div>
-                                3
-                            </div>
+                        <div className='text-center'>
+                            <div className="price">$ {item.precio} </div>
                         </div>
-                        <div className="col-2 icon-article">
-                            <i className="bi bi-droplet-half icono" />
-                            <div>
-                                4
-                            </div>
+                    </div>
+                    <div className="col-2 icon-article">
+                        <i className="bi bi-door-closed  icono" />
+                        <div>
+                            {item.cantidadCuartos}
                         </div>
-                        <div className="col-2 icon-article">
-                            <i className="bi bi-car-front-fill icono" />
-                            <div>
-                                4
-                            </div>
+                    </div>
+                    <div className="col-2 icon-article">
+                        <i className="bi bi-droplet-half icono" />
+                        <div>
+                            {item.cantidadBanos}
                         </div>
-                        <div className="col-2 icon-article">
-                            <i className="bi bi-arrows-fullscreen icono" />
-                            <div className="text-center">
-                                <div className='text-mini flex-center'>
-                                    190mts
-                                </div>
+                    </div>
+                    <div className="col-2 icon-article">
+                        <i className="bi bi-car-front-fill icono" />
+                        <div>
+                            {item.cantidadEstacionamientos}
+                        </div>
+                    </div>
+                    <div className="col-2 icon-article">
+                        <i className="bi bi-arrows-fullscreen icono" />
+                        <div className="text-center">
+                            <div className='text-mini flex-center'>
+                                {item.metrosConstruccion} Mts
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
+    </>)
 }

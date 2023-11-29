@@ -8,7 +8,7 @@ export default function Login() {
     return (<>
         <div className='container-fluid bg-dark py-5 vh-100'>
             <div className='row'>
-                <div className='col-10 offset-1 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-4 offset-lg-4 '>
+                <div className='col-sm-10 offset-sm-1 col-md-6 offset-md-3 col-lg-4 offset-lg-4'>
                     <div className='p-5 radius-5 mt-5'>
                         <div className="d-flex justify-content-center">
                             <LogoRounded width={150} height={150} />

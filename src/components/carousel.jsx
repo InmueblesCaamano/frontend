@@ -7,7 +7,7 @@ export default function Carousel() {
                 </div>
             </div>
             <h1 className='mb-3 text-white'> <i className='bi bi-pin' />Ecuentra la propiedad de tus sueños</h1>
-            <div className="container bg-light p-4 wrapFinder">
+            {/* <div className="container bg-light p-4 wrapFinder">
                 <div className="row">
                     <div className="col-12 col-lg-2">
                         <div className="text-start">
@@ -44,7 +44,7 @@ export default function Carousel() {
                         <button className="btn btn-primary px-5"> <i className='px-4 bi bi-search' /> Buscar </button>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     </div>)
 }

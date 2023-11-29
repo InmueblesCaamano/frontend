@@ -1,6 +1,9 @@
+import { Link } from "react-router-dom"
 import useNavStore from "../store/navStore"
 import LoginButton from "./navbar/loginButton"
+import useSessionStore from "../store/sesionStore"
 export default function NavbarCollapse() {
+    const {user} = useSessionStore()
     const { collapse } = useNavStore()
     return (
         <div className="bg-nav">
@@ -27,7 +30,14 @@ export default function NavbarCollapse() {
                         <a className="nav-link" href="#"><i className="bi bi-shop" />Locales Comerciales</a>
                     </li>
                     <li>
-                        <LoginButton/>
+                        {user.level === 999 &&
+                            <Link to='/dashboard'>
+                                <button onClick={collapse} className="btn btn-danger my-3" > <i className="bi-people"></i> Administracion </button>
+                            </Link>
+                        }
+                    </li>
+                    <li>
+                        <LoginButton />
                     </li>
                 </ul>
             </div>
