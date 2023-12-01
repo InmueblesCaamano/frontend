@@ -11,7 +11,7 @@ import useInitApp from './hooks/useInitApp'
 const App = () => {
   const initApp = useInitApp()
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => { initApp(); console.log('Iniciando aplicacion') }, [])
+  useEffect(() => { initApp() }, [])
   return (
     <>
       <Loading />

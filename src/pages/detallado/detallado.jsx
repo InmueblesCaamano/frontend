@@ -10,9 +10,7 @@ const Deatallado = () => {
 
     const getBuilding = async (id) => {
         const response = await request.get(ApiUrl + "/buildings/" + id)
-
         setBuilding(response.body)
-        console.log('../files/' + response.body.images[0].filename)
         setActualPicture('../../files/' + response.body.images[0].filename)
     }
 
