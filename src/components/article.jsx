@@ -3,7 +3,6 @@ import '../css/article.css'
 import { useNavigate } from 'react-router-dom'
 export default function Article({ item }) {
     const navigate = useNavigate()
-    console.log(item)
     return (<>
         <div onClick={() => navigate('/detallado/' + item._id)} className="bgArticle pb-3">
             <div className='card-article'>

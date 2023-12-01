@@ -14,12 +14,12 @@ const LoadImages = ({  previewImage, errorMessage, handleImageChange, setSelecte
             <div className="text-danger text-sm mb-2">
                 {errorMessage}
             </div>
-            <div className="text-center px-3">
+            {/* <div className="text-center px-3">
                 <button onClick={()=>{
                     setSelectedImage(null)
                     setPreviewImage(null)
                 }} className="btn w-100 btn-danger px-3"> Borrar </button>
-            </div>
+            </div> */}
             <input accept="image/*" onChange={(e) => handleImageChange(e, setSelectedImage, setPreviewImage, setErrorMessage)} id={labelName} type="file" style={{ display: "none" }} />
         </div>
     </>)

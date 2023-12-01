@@ -1,13 +1,17 @@
+/* import { Link } from "react-router-dom" */
+/* import { ApiUrl } from "../../services/apiurl" */
+import request from "../../services/request"
 import { useState } from "react"
-import { useBulidingStore } from "../../store/buildingStore"
 import municipios from "../../services/ubicaciones"
-/* import request from "../../services/request" */
-import { ApiUrl } from "../../services/apiurl"
 import LoadImages from "../../components/loadImages/loadImages"
-import { Link } from "react-router-dom"
+import useLoadingStore from "../../store/loadingStore"
+import { useParams } from "react-router-dom";
 const AddImages = () => {
 
-    const { building = { municipios: 1, parroquias: "", precio: 0 } } = useBulidingStore()
+    const { id, precio, municipio, parroquia } = useParams()
+
+    const { setLoading } = useLoadingStore()
+    /* const { building = { municipios: 1, parroquias: "", precio: 0 } } = useBulidingStore() */
     const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/tiff'];
     const [selectedImage1, setSelectedImage1] = useState(null);
     const [selectedImage2, setSelectedImage2] = useState(null);
@@ -30,11 +34,22 @@ const AddImages = () => {
     const [errorMessage5, setErrorMessage5] = useState('');
     const [errorMessage6, setErrorMessage6] = useState('');
 
-    const handleImageChange = (e, setImage, setPreview, setErrorMessage) => {
+    const handleImageChange = async (e, setImage, setPreview, setErrorMessage) => {
         const file = e.target.files[0]
+        setLoading(true)
+        console.log(file)
         if (file && allowedImageTypes.includes(file.type)) {
             setErrorMessage('')
             setImage(file);
+            try {
+                const blobUrl = "https://blob-starter-rosy.vercel.app/api/upload"
+                const response = await request.post(blobUrl)
+                console.log(response)
+                
+            } catch (error) {
+                setLoading(false)
+            }
+
             const reader = new FileReader();
             reader.onload = () => {
                 setPreview(reader.result);
@@ -45,11 +60,12 @@ const AddImages = () => {
             setPreview(null);
             setErrorMessage('Por favor, selecciona una imagen válida (JPEG, PNG o GIF).');
         }
+        setLoading(false)
     }
 
-    const handleUpload = () => {
+    /* const handleUpload = () => {
         if (selectedImage1) {
-            /*   setLoading(true) */
+           
             const formData = new FormData()
             formData.append('image', selectedImage1)
             formData.append('image', selectedImage2)
@@ -58,7 +74,7 @@ const AddImages = () => {
             formData.append('image', selectedImage5)
             formData.append('image', selectedImage6)
 
-            /* 'http://localhost:4000/api/v1/upload/' */
+            // 'http://localhost:4000/api/v1/upload/'
             fetch(ApiUrl + "/upload/" + building._id, {
                 method: 'POST',
                 body: formData,
@@ -75,7 +91,7 @@ const AddImages = () => {
         } else {
             alert('Debe seleccionar almenos 1 imagen')
         }
-    }
+    } */
 
     return (<>
         <div className="bg-dark py-4">.</div>
@@ -87,9 +103,9 @@ const AddImages = () => {
                             <div className="tittle-add-images">
                                 <div>
                                     <h4>
-                                        {building && municipios[building.municipios].Municipio + ', ' + building.parroquias}
+                                       {municipios[municipio].Municipio}, {parroquia && parroquia}
                                     </h4>
-                                    <h2 className="text-primary" >${building.precio}</h2>
+                                    <h2 className="text-primary" >${precio && precio}</h2>
                                 </div>
                             </div>
                         </div>
@@ -104,14 +120,6 @@ const AddImages = () => {
                                 <LoadImages labelName="file-input5" setSelectedImage={setSelectedImage5} setPreviewImage={setPreviewImage5} setErrorMessage={setErrorMessage5} previewImage={previewImage5} errorMessage={errorMessage5} handleImageChange={handleImageChange} />
                                 <LoadImages labelName="file-input6" setSelectedImage={setSelectedImage6} setPreviewImage={setPreviewImage6} setErrorMessage={setErrorMessage6} previewImage={previewImage6} errorMessage={errorMessage6} handleImageChange={handleImageChange} />
                             </div>
-                        </div>
-                    </div>
-                    <div className="row mt-5">
-                        <div className="col-12 text-end">
-                            <Link to="/dashboard">
-                                <button className="btn btn-default border border-dark" > Regresar </button>
-                            </Link>
-                            <button onClick={handleUpload} className="btn btn-primary px-4" > <i className="bi-archive" /> Guardar</button>
                         </div>
                     </div>
                 </div>

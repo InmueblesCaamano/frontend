@@ -43,7 +43,7 @@ const Agregar = () => {
         const res = await request.post(url, body)
         if (res.status) {
             setBuilding(res.body)
-            navigate('/addimages')
+            navigate('/addimages/'+res.body._id+'/'+res.body.precio+'/'+res.body.municipios+'/'+res.body.parroquias)
             setLoading(false)
             return
         }
