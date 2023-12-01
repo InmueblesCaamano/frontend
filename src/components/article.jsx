@@ -3,21 +3,32 @@ import '../css/article.css'
 import { useNavigate } from 'react-router-dom'
 export default function Article({ item }) {
     const navigate = useNavigate()
+    console.log(item)
     return (<>
         <div onClick={() => navigate('/detallado/' + item._id)} className="bgArticle pb-3">
             <div className='card-article'>
                 <div className='articleImage'>
                     {/* {item && item.images.lenght > 0 && console.log(item._id, ' - ',item.images[0].filename)} */}
-                    {item ? <>
-                        <img src={ '../files/'+item.images[0].filename} className='img-article' alt="" />
-                    </> : <> No image </>}
+                    {/* {item?.images.lenght > 0 ? <>
+                    {console.log(item)}
+                    si imagen */}
+                    {/* <img src={item?.images[0].filename && '../files/'+item.images[0].filename} className='img-article' alt="" /> */}
+                    {/* </> : <> No image </>} */}
+                    {item.images.length > 0 ? <>
+                        <img src={'../files/' + item.images[0].filename} className='img-article' alt="" />
+                    </> : <div className='noimage' >
+                        <i className='bi-image' />
+                        <div>
+                            Sin imagen
+                        </div>
+                    </div>}
                     <div className='fondo' />
                     <div className="tittle-article">
                         {item.parroquias}, {item.tipo}
                     </div>
                 </div>
             </div>
-           <div className="container-fluid">
+            <div className="container-fluid">
                 <div className="row pt-2">
                     <div className="col-4">
                         <div className="bg-dark-transparent text-light text-mini text-center rounded p-1">

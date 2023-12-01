@@ -6,7 +6,7 @@ import useBuilding from '../../hooks/useBuilding'
 const Inmuebles = () => {
     const { deleteBuilding } = useBuilding()
     const { buildings } = useBulidingStore()
-    const urlImages = './files/'
+   /*  const urlImages = './files/' */
     return (<div className="container-fluid p-2 inmuebles-body">
         <div className="bg-white p-3 text-center mb-2" >
             <Link className='decoration-none' to='/agregar'>
@@ -33,7 +33,7 @@ const Inmuebles = () => {
                     return (<div className='row bg-white mt-2' key={i}>
                         <div className='col-2 p-3'>
                             <div className='picture'>
-                                <img className='pictureAdmin' src={urlImages + item.images[0].filename} alt="" />
+                                {/* <img className='pictureAdmin' src={urlImages + item.images[0].filename} alt="" /> */}
                             </div>
                         </div>
                         <div className='col-8 p-3'>

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 import LogoRounded from "../logoRounded"
 import LoginButton from "./loginButton"
 import useSessionStore from "../../store/sesionStore"
-useSessionStore
+
 export default function NavBar() {
     const { user } = useSessionStore()
     const { isCollapsed, expand } = useNavStore()
