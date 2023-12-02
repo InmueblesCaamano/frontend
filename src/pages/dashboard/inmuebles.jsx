@@ -6,7 +6,7 @@ import useBuilding from '../../hooks/useBuilding'
 const Inmuebles = () => {
     const { deleteBuilding } = useBuilding()
     const { buildings } = useBulidingStore()
-   /*  const urlImages = './files/' */
+    /*  const urlImages = './files/' */
     return (<div className="container-fluid p-2 inmuebles-body">
         <div className="bg-white p-3 text-center mb-2" >
             <Link className='decoration-none' to='/agregar'>
@@ -29,18 +29,18 @@ const Inmuebles = () => {
                 {buildings && buildings.map((item, i) => {
                     const { precio, cantidadCuartos, parroquias, descripcion,
                         cantidadBanos, cantidadEstacionamientos, metrosTerreno,
-                        metrosConstruccion, ventaOAlquiler,tipo } = item
+                        metrosConstruccion, ventaOAlquiler, tipo } = item
                     return (<div className='row bg-white mt-2' key={i}>
                         <div className='col-2 p-3'>
                             <div className='picture'>
-                                {/* <img className='pictureAdmin' src={urlImages + item.images[0].filename} alt="" /> */}
+                                <img className='pictureAdmin' src={item.images[0]} alt="" />
                             </div>
                         </div>
                         <div className='col-8 p-3'>
                             <div>
                                 <div>
                                     <h3 className='p-0 m-0'>
-                                       {tipo} , {municipios[item.municipios].Municipio} <i className='px-1 text-white bg-gray'>{ventaOAlquiler}</i>
+                                        {tipo} , {municipios[item.municipios].Municipio} <i className='px-1 text-white bg-gray'>{ventaOAlquiler}</i>
                                     </h3>
                                     <p>{parroquias}</p>
                                 </div>
@@ -65,8 +65,8 @@ const Inmuebles = () => {
                             </div>
                         </div>
                         <div className='col-2 p-3'>
-                            <button onClick={()=>deleteBuilding(item._id)} className='btn btn-danger' > Eliminar esta propiedad </button>
-                           {/*  <button className='btn btn-primary w-100'> Editar </button> */}
+                            <button onClick={() => deleteBuilding(item._id)} className='btn btn-danger' > Eliminar esta propiedad </button>
+                            {/*  <button className='btn btn-primary w-100'> Editar </button> */}
                         </div>
                     </div>)
                 })}

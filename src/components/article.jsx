@@ -14,7 +14,7 @@ export default function Article({ item }) {
                     {/* <img src={item?.images[0].filename && '../files/'+item.images[0].filename} className='img-article' alt="" /> */}
                     {/* </> : <> No image </>} */}
                     {item.images.length > 0 ? <>
-                        <img src={'../files/' + item.images[0].filename} className='img-article' alt="" />
+                        <img src={item.images[0]} className='img-article' alt="" />
                     </> : <div className='noimage' >
                         <i className='bi-image' />
                         <div>

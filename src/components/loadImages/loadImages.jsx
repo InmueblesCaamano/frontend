@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-const LoadImages = ({  previewImage, errorMessage, handleImageChange, setSelectedImage, setPreviewImage, setErrorMessage, labelName }) => {
+const LoadImages = ({ imgIndex, previewImage, errorMessage, handleImageChange, setPreviewImage, setErrorMessage, labelName }) => {
    
     return (<>
         <div className="">
@@ -20,7 +20,7 @@ const LoadImages = ({  previewImage, errorMessage, handleImageChange, setSelecte
                     setPreviewImage(null)
                 }} className="btn w-100 btn-danger px-3"> Borrar </button>
             </div> */}
-            <input accept="image/*" onChange={(e) => handleImageChange(e, setSelectedImage, setPreviewImage, setErrorMessage)} id={labelName} type="file" style={{ display: "none" }} />
+            <input accept="image/*" onChange={(e) => handleImageChange(e, setPreviewImage, setErrorMessage,imgIndex)} id={labelName} type="file" style={{ display: "none" }} />
         </div>
     </>)
 }

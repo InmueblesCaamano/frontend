@@ -1,24 +1,18 @@
-/* import { Link } from "react-router-dom" */
-/* import { ApiUrl } from "../../services/apiurl" */
 import request from "../../services/request"
 import { useState } from "react"
 import municipios from "../../services/ubicaciones"
 import LoadImages from "../../components/loadImages/loadImages"
 import useLoadingStore from "../../store/loadingStore"
 import { useParams } from "react-router-dom";
+import { ApiUrl } from "../../services/apiurl"
+import useInitApp from "../../hooks/useInitApp"
 const AddImages = () => {
-
+    const {initApp} = useInitApp()
     const { id, precio, municipio, parroquia } = useParams()
 
     const { setLoading } = useLoadingStore()
     /* const { building = { municipios: 1, parroquias: "", precio: 0 } } = useBulidingStore() */
     const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/tiff'];
-    const [selectedImage1, setSelectedImage1] = useState(null);
-    const [selectedImage2, setSelectedImage2] = useState(null);
-    const [selectedImage3, setSelectedImage3] = useState(null);
-    const [selectedImage4, setSelectedImage4] = useState(null);
-    const [selectedImage5, setSelectedImage5] = useState(null);
-    const [selectedImage6, setSelectedImage6] = useState(null);
 
     const [previewImage1, setPreviewImage1] = useState(null);
     const [previewImage2, setPreviewImage2] = useState(null);
@@ -34,18 +28,31 @@ const AddImages = () => {
     const [errorMessage5, setErrorMessage5] = useState('');
     const [errorMessage6, setErrorMessage6] = useState('');
 
-    const handleImageChange = async (e, setImage, setPreview, setErrorMessage) => {
-        const file = e.target.files[0]
+    const handleImageChange = async (e, setPreview, setErrorMessage,imgIndex) => {
         setLoading(true)
-        console.log(file)
+        const file = e.target.files[0]
+        const imgbb = "https://api.imgbb.com/1/upload?key=7931846fbc1c51d230a5ea5e92600423"
+        const data = new FormData()
+        data.append('image',file)
+
         if (file && allowedImageTypes.includes(file.type)) {
             setErrorMessage('')
-            setImage(file);
             try {
-                const blobUrl = "https://blob-starter-rosy.vercel.app/api/upload"
-                const response = await request.post(blobUrl)
-                console.log(response)
-                
+                const response  = await fetch(imgbb,{
+                    method: 'POST',
+                    body: data,
+                })
+                const responseData = await response.json()
+                const url = responseData.data.url
+                console.log(imgIndex)
+                const body = {url}
+                const serverResponse = await request.post(ApiUrl + '/upload/'+id,body)
+                if(serverResponse){
+                    await initApp()
+                }else{
+                    alert('Ocurrio un error')
+                }
+
             } catch (error) {
                 setLoading(false)
             }
@@ -56,7 +63,6 @@ const AddImages = () => {
             };
             reader.readAsDataURL(file);
         } else {
-            setImage(null);
             setPreview(null);
             setErrorMessage('Por favor, selecciona una imagen válida (JPEG, PNG o GIF).');
         }
@@ -103,7 +109,7 @@ const AddImages = () => {
                             <div className="tittle-add-images">
                                 <div>
                                     <h4>
-                                       {municipios[municipio].Municipio}, {parroquia && parroquia}
+                                        {municipios[municipio].Municipio}, {parroquia && parroquia}
                                     </h4>
                                     <h2 className="text-primary" >${precio && precio}</h2>
                                 </div>
@@ -113,12 +119,12 @@ const AddImages = () => {
                     <div className="row">
                         <div className="col-12">
                             <div className="gridImages">
-                                <LoadImages labelName="file-input1" setSelectedImage={setSelectedImage1} setPreviewImage={setPreviewImage1} setErrorMessage={setErrorMessage1} previewImage={previewImage1} errorMessage={errorMessage1} handleImageChange={handleImageChange} />
-                                <LoadImages labelName="file-input2" setSelectedImage={setSelectedImage2} setPreviewImage={setPreviewImage2} setErrorMessage={setErrorMessage2} previewImage={previewImage2} errorMessage={errorMessage2} handleImageChange={handleImageChange} />
-                                <LoadImages labelName="file-input3" setSelectedImage={setSelectedImage3} setPreviewImage={setPreviewImage3} setErrorMessage={setErrorMessage3} previewImage={previewImage3} errorMessage={errorMessage3} handleImageChange={handleImageChange} />
-                                <LoadImages labelName="file-input4" setSelectedImage={setSelectedImage4} setPreviewImage={setPreviewImage4} setErrorMessage={setErrorMessage4} previewImage={previewImage4} errorMessage={errorMessage4} handleImageChange={handleImageChange} />
-                                <LoadImages labelName="file-input5" setSelectedImage={setSelectedImage5} setPreviewImage={setPreviewImage5} setErrorMessage={setErrorMessage5} previewImage={previewImage5} errorMessage={errorMessage5} handleImageChange={handleImageChange} />
-                                <LoadImages labelName="file-input6" setSelectedImage={setSelectedImage6} setPreviewImage={setPreviewImage6} setErrorMessage={setErrorMessage6} previewImage={previewImage6} errorMessage={errorMessage6} handleImageChange={handleImageChange} />
+                                <LoadImages imgIndex={0} labelName="file-input1"  setPreviewImage={setPreviewImage1} setErrorMessage={setErrorMessage1} previewImage={previewImage1} errorMessage={errorMessage1} handleImageChange={handleImageChange} />
+                                <LoadImages imgIndex={1} labelName="file-input2"  setPreviewImage={setPreviewImage2} setErrorMessage={setErrorMessage2} previewImage={previewImage2} errorMessage={errorMessage2} handleImageChange={handleImageChange} />
+                                <LoadImages imgIndex={2} labelName="file-input3"  setPreviewImage={setPreviewImage3} setErrorMessage={setErrorMessage3} previewImage={previewImage3} errorMessage={errorMessage3} handleImageChange={handleImageChange} />
+                                <LoadImages imgIndex={3} labelName="file-input4"  setPreviewImage={setPreviewImage4} setErrorMessage={setErrorMessage4} previewImage={previewImage4} errorMessage={errorMessage4} handleImageChange={handleImageChange} />
+                                <LoadImages imgIndex={4} labelName="file-input5"  setPreviewImage={setPreviewImage5} setErrorMessage={setErrorMessage5} previewImage={previewImage5} errorMessage={errorMessage5} handleImageChange={handleImageChange} />
+                                <LoadImages imgIndex={5} labelName="file-input6"  setPreviewImage={setPreviewImage6} setErrorMessage={setErrorMessage6} previewImage={previewImage6} errorMessage={errorMessage6} handleImageChange={handleImageChange} />
                             </div>
                         </div>
                     </div>

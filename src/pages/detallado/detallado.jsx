@@ -11,7 +11,7 @@ const Deatallado = () => {
     const getBuilding = async (id) => {
         const response = await request.get(ApiUrl + "/buildings/" + id)
         setBuilding(response.body)
-        setActualPicture('../../files/' + "2"/*  response.body.images[0].filename */)
+        setActualPicture(response.body.images[0])
     }
 
     useEffect(() => {
@@ -28,13 +28,14 @@ const Deatallado = () => {
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="mb-4 actualPicture">
-                            {building?.images.length > 0 ? <>si  </> : <> no </>}
-                            {/* {building?.images && <img className="imgDetallado" src={'files/' + actualPicture} />} */}
+                            {building?.images.length > 0 ? <>
+                                <img className="imgDetallado" src={actualPicture} />
+                            </> : <> Sin imagen </>}
                         </div>
                         <div className="row px-2">
                             {building?.images && building.images.map((foto, index) => {
                                 return (<div className="col-2 p-2" key={index}>
-                                    {/*  <img onClick={() => setActualPicture('../../files/' + foto.filename)} className="imgDisplay" src={'../files/' + foto.filename} /> */}
+                                    <img onClick={() => setActualPicture(foto)} className="imgDisplay" src={foto} />
                                 </div>)
                             })}
                         </div>
