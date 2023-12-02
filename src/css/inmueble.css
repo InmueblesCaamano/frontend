@@ -146,25 +146,19 @@
 .d-between{
     display: flex;
     justify-content: space-between;
+    align-items:center;
 }
 .d-between h3{
-    margin-top: 15px;
     color: #434343;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: lighter;
-    line-height: 20px;
     padding: 0px;
-    height: 25px;
-    margin-bottom: 20px;
 }
 .d-between h2{
-    margin-top: 15px;
     color: #434343;
     font-size: 35px;
     font-weight: lighter;
-    line-height: 20px;
     padding: 0px;
-    height: 25px;
 }
 hr{
     padding: 0px;

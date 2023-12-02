@@ -27,13 +27,12 @@ const HomeBody = ({ tipo }) => {
     }
 
     return (<>
-        <div className='container mt-4 mb-5'>
+        <div className='container-fluid px-5 mt-4 mb-5'>
             <div className='row'>
                 <div className="col-12 pt-2">
                     <h4>
                         {list[tipo] && <> {list[tipo]} en Margarita</>} 
                     </h4>
-                    {/* <hr className="w-50" /> */}
                 </div>
                 {actBuildings && actBuildings.length > 0 && actBuildings.map((item, index) => {
                     return (<div key={index} className='col-10 offset-1 offset-sm-0 col-md-6 col-lg-3 mb-4 '>

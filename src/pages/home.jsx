@@ -5,9 +5,9 @@ const Home = () => {
     return (<>
         <div>
             <Carousel />
-            <div className="container">
+            <div className="container-fluid px-5">
                 <div className="row">
-                    <div className="col-12 pt-5">
+                    <div className="col-12 pt-5 pb-3">
                         <h4>
                             Populares en margarita
                         </h4>
