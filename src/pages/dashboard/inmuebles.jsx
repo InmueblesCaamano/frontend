@@ -3,9 +3,16 @@ import '../../css/inmueble.css'
 import { useBulidingStore } from '../../store/buildingStore'
 import municipios from '../../services/ubicaciones'
 import useBuilding from '../../hooks/useBuilding'
+import { useNavigate } from 'react-router-dom'
 const Inmuebles = () => {
+    const navigate = useNavigate()
     const { deleteBuilding } = useBuilding()
     const { buildings } = useBulidingStore()
+
+    const redirect = (item) => {
+        navigate(`/addimages/${item._id}/${item.precio}/${item.municipios}/${item.parroquias}`)
+        //addimages/656dec2b13bb5626374d342e/4/6/Adrián
+    }
     /*  const urlImages = './files/' */
     return (<div className="container-fluid p-2 inmuebles-body">
         <div className="bg-white p-3 text-center mb-2" >
@@ -27,21 +34,35 @@ const Inmuebles = () => {
                     </div>
                 </div>
                 {buildings && buildings.map((item, i) => {
+
                     const { precio, cantidadCuartos, parroquias, descripcion,
                         cantidadBanos, cantidadEstacionamientos, metrosTerreno,
                         metrosConstruccion, ventaOAlquiler, tipo } = item
+
                     return (<div className='row bg-white mt-2' key={i}>
                         <div className='col-2 p-3'>
-                            <div className='picture'>
-                                <img className='pictureAdmin' src={item.images[0]} alt="" />
+                            <div className='picture border border-dark'>
+                                {item.images.length === 0 ? <>
+                                    <button onClick={() => redirect(item)} className='btn btn-primary d-flex'>
+                                        <h1>+</h1>
+                                        <i className='bi-image' />
+                                    </button>
+                                </> : <>
+                                    <img onClick={() => redirect(item)} className='pictureAdmin' src={item.images[0]} alt="" />
+                                </>}
                             </div>
                         </div>
                         <div className='col-8 p-3'>
                             <div>
                                 <div>
-                                    <h3 className='p-0 m-0'>
-                                        {tipo} , {municipios[item.municipios].Municipio} <i className='px-1 text-white bg-gray'>{ventaOAlquiler}</i>
-                                    </h3>
+                                    <div className='between'>
+                                        <h3>
+                                            {tipo} , {municipios[item.municipios].Municipio}
+                                        </h3>
+                                        <div>
+                                            <i className='p-2 px-3 text-white bg-dark rounded'>{ventaOAlquiler}</i>
+                                        </div>
+                                    </div>
                                     <p>{parroquias}</p>
                                 </div>
                                 <div>

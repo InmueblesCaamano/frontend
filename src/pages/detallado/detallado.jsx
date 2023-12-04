@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import request from "../../services/request";
 import { ApiUrl } from "../../services/apiurl";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import getMunicipio from "../../services/getMunicipio";
 import useLoadingStore from "../../store/loadingStore"
 const Deatallado = () => {
@@ -9,12 +9,18 @@ const Deatallado = () => {
     const { id } = useParams()
     const [building, setBuilding] = useState()
     const [actualPicture, setActualPicture] = useState()
+    const [actualPage,setActualPage] = useState(0)
 
     const getBuilding = async (id) => {
         setLoading(true)
         const response = await request.get(ApiUrl + "/buildings/" + id)
-        setBuilding(response.body)
-        setActualPicture(response.body.images[0])
+        if(!response.status){
+            setActualPage(1)
+        }else{
+            
+            setBuilding(response.body)
+            setActualPicture(response.body.images[0])
+        }
         setLoading(false)
     }
 
@@ -22,6 +28,14 @@ const Deatallado = () => {
         if (id) getBuilding(id)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
+
+    if(actualPage === 1){
+        return (<div className="pt-5 text-center">
+            <h2>404</h2>
+            <h4>Propiedad no encontrada</h4>
+            <Link className="btn btn-primary" to='/'> Regresar al inicio </Link>
+        </div>)
+    }
 
     return (
         <>
@@ -31,7 +45,7 @@ const Deatallado = () => {
             <div className="container-fluid mt-4 px-5">
                 <div className="row">
                     <div className="col-12 col-md-6">
-                        <div className="mb-4 actualPicture">
+                        <div className="actualPicture">
                             {building?.images.length > 0 ? <>
                                 <img className="imgDetallado" src={actualPicture} />
                             </> : <> Sin imagen </>}
@@ -55,8 +69,6 @@ const Deatallado = () => {
                             {building?.descripcion}
                         </div>
                         <div className="bg-white p-4 mt-1 rounded">
-
-
                             <div className="d-between px-3">
                                 <h3>
                                     Cantidad de Cuartos

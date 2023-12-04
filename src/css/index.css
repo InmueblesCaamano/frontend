@@ -27,7 +27,11 @@ body {
   align-items: center;
   justify-content: center;
 }
-
+.between{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .navegador {
   display: flex;
   justify-content: space-between;

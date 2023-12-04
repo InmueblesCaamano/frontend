@@ -18,6 +18,7 @@ const Router = () => {
             <Route path="/agregar" element={<Agregar />} />
             <Route path="/addimages/:id/:precio/:municipio/:parroquia" element={<AddImages />} />
             <Route path="/detallado/:id" element={<Deatallado />} />
+            <Route path="/:id" element={<Deatallado />} />
             <Route path="/propiedades/:tipo" element={<Propiedades />} />
             <Route path="/*" element={<div className="404">404 Not found</div>} />
         </Routes>
