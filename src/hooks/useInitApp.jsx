@@ -7,14 +7,15 @@ const useInitApp = () => {
     const { setSession, setUser } = useSessionStore()
     const { setBuildings } = useBulidingStore()
 
-    const initApp = () => {
+    const initApp = async () => {
         const localStorageUser = localStorage.getItem('user')
         if (localStorageUser) {
             setSession(true)
             const user = JSON.parse(localStorageUser)
             setUser(user)
         }
-        getBuildings()
+
+        await getBuildings()
     }
 
     const getBuildings = async () => {
@@ -24,11 +25,11 @@ const useInitApp = () => {
             setBuildings(response.body)
             return
         }
-        console.log('No se pudieron obtener los buildings')
+        console.log('No se pudieron obtener la propiedades')
     }
 
     return initApp
-    
+
 }
 
 export default useInitApp

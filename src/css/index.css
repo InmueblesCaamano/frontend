@@ -19,7 +19,7 @@ body {
 .background-img {
   min-height: 100vh;
   padding-bottom: 100px;
-  background: linear-gradient(rgba(0, 0, 0, 0.452), rgba(0, 0, 0, 0.24)), url(https://images.hola.com/imagenes/decoracion/20221130221828/decoracion-navidad-para-casa-il/1-170-826/decoracion-navidad-01t-t.jpg?tx=w_1200);
+  background: linear-gradient(rgba(0, 0, 0, 0.452), rgba(0, 0, 0, 0.24)), url(img/bg2.webp);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

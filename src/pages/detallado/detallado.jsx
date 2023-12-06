@@ -5,19 +5,19 @@ import { Link, useParams } from "react-router-dom";
 import getMunicipio from "../../services/getMunicipio";
 import useLoadingStore from "../../store/loadingStore"
 const Deatallado = () => {
-    const {setLoading} = useLoadingStore();
+    const { setLoading } = useLoadingStore();
     const { id } = useParams()
     const [building, setBuilding] = useState()
     const [actualPicture, setActualPicture] = useState()
-    const [actualPage,setActualPage] = useState(0)
+    const [actualPage, setActualPage] = useState(0)
 
     const getBuilding = async (id) => {
         setLoading(true)
         const response = await request.get(ApiUrl + "/buildings/" + id)
-        if(!response.status){
+        if (!response.status) {
             setActualPage(1)
-        }else{
-            
+        } else {
+
             setBuilding(response.body)
             setActualPicture(response.body.images[0])
         }
@@ -29,7 +29,7 @@ const Deatallado = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id])
 
-    if(actualPage === 1){
+    if (actualPage === 1) {
         return (<div className="pt-5 text-center">
             <h2>404</h2>
             <h4>Propiedad no encontrada</h4>
@@ -39,9 +39,7 @@ const Deatallado = () => {
 
     return (
         <>
-            <div className="bg-dark p-4 ">
-                .
-            </div>
+            <div className="bg-dark p-4 ">.</div>
             <div className="container-fluid mt-4 px-5">
                 <div className="row">
                     <div className="col-12 col-md-6">
@@ -114,13 +112,13 @@ const Deatallado = () => {
                                 </h2>
                             </div>
                         </div>
-                        <div className="mt-3">
+                        <div className="mt-3 mb-5">
                             <div className="row">
                                 <div className="col-6">
-                                    <button onClick={()=> window.open("tel:+584248261631")} className="btn btn-lg btn-primary w-100"> <i className="bi-telephone" /> Llamar al vendedor </button>
+                                    <button onClick={() => window.open("tel:+58" + building?.ws)} className="btn btn-lg btn-primary w-100"> <i className="bi-telephone" /> Llamar al vendedor </button>
                                 </div>
                                 <div className="col-6">
-                                    <button onClick={() => window.open('https://wa.me/04248261631', '_blank')} className="btn btn-lg btn-success w-100"> <i className="bi-telephone" /> Contactar al Whatsapp </button>
+                                    <button onClick={() => window.open('https://wa.me/+58' + building?.tel, '_blank')} className="btn btn-lg btn-success w-100"> <i className="bi-telephone" /> Contactar al Whatsapp </button>
                                 </div>
                             </div>
                         </div>

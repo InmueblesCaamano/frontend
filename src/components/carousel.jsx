@@ -3,7 +3,7 @@ export default function Carousel() {
         <div className='land'>
             <div className='imgWrapper'>
                 <div className="circle">
-                    <img src='./img/logo.png' width={"180"} height={"180"} alt='logo' className="img-Logo"/>
+                    <img src='/img/logo.png' width={"180"} height={"180"} alt='logo' className="img-Logo"/>
                 </div>
             </div>
             <h1 className='mb-3 home-title text-white'>Ecuentra la propiedad de tus sueños</h1>

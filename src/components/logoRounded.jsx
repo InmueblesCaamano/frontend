@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import logo from '../../public/img/logo.png';
+import logo from '/img/logo.png';
 const LogoRounded = ({width,height}) => {
     return (
         <div className="logoRounded" style={{width,height}}>

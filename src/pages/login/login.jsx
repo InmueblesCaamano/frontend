@@ -15,8 +15,8 @@ export default function Login() {
                         </div>
                         <h1 className='text-light'>Iniciar sesión</h1>
                         <form onSubmit={(e) => login(e)}>
-                            <input defaultValue={'m@gmail.com'} required name="email" id="email" className='form-control mt-4' type="email" placeholder="Correo electrónico" />
-                            <input defaultValue={'123'} required name="password" id="password" className='form-control mt-4' type="password" placeholder="Contraseña" />
+                            <input  required name="email" id="email" className='form-control mt-4' type="email" placeholder="Correo electrónico" />
+                            <input  required name="password" id="password" className='form-control mt-4' type="password" placeholder="Contraseña" />
                             {loading ? <>cargando</> :<button className='btn btn-primary mt-4' >Iniciar sesión</button>}
                         </form>
                         <div className='text-warning text-center pt-4'>

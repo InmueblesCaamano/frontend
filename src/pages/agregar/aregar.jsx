@@ -1,63 +1,10 @@
-import { useState } from "react"
 /* eslint-disable react/jsx-key */
 import municipios from "../../services/ubicaciones"
-import request from "../../services/request"
-import { ApiUrl } from "../../services/apiurl"
-import useSessionStore from "../../store/sesionStore"
-import { useBulidingStore } from "../../store/buildingStore"
-import { useNavigate } from "react-router-dom"
-
-import useNotificationStore from "../../store/notificationStore"
-import useLoadingStore from "../../store/loadingStore"
+import useAgregar from "../../hooks/useAgregar"
 const Agregar = () => {
 
-    const { setLoading } = useLoadingStore()
-    const { user } = useSessionStore()
-    const navigate = useNavigate()
-    const { setBuilding } = useBulidingStore()
-    const [parroquias, setParroquias] = useState([])
-    const { setNotification } = useNotificationStore()
-
-    const sendForm = async (e) => {
-        setLoading(true)
-        e.preventDefault()
-
-        const body = {
-            municipios: e.target.municipios.value,
-            parroquias: e.target.parroquias.value,
-            descripcion: e.target.descripcion.value,
-            precio: e.target.precio.value,
-            cantidadCuartos: e.target.cantidadCuartos.value,
-            ventaOAlquiler: e.target.ventaOAlquiler.value,
-            cantidadBanos: e.target.cantidadBanos.value,
-            cantidadEstacionamientos: e.target.cantidadEstacionamientos.value,
-            metrosTerreno: e.target.metrosTerreno.value,
-            metrosConstruccion: e.target.metrosConstruccion.value,
-            idPublicante: user._id,
-            tipo: e.target.tipo.value
-        }
-
-       /*  console.log(body) */
-        
-        const url = ApiUrl + "/buildings"
-        const res = await request.post(url, body)
-        if (res.status) {
-            setBuilding(res.body)
-            navigate('/addimages/'+res.body._id+'/'+res.body.precio+'/'+res.body.municipios+'/'+res.body.parroquias)
-            setLoading(false)
-            return
-        }
-        setLoading(false)
-        setNotification(res.message)
-    }
-
-    const handleParroquias = (value) => {
-        if (value) {
-            setParroquias(municipios[value].parroquias)
-        } else {
-            setParroquias([])
-        }
-    }
+    const { sendForm, handleParroquias, handleTel, handleWs,
+        wsAlert, telAlert, parroquias } = useAgregar()
 
     return (<>
         <div className="bg-dark text-light pt-5 px-3 pb-2">
@@ -141,6 +88,38 @@ const Agregar = () => {
 
                                     <div>Metros cuadrados de construccion</div>
                                     <input id="metrosConstruccion" className="mb-3 form-control border border-dark" type="number" name="metrosConstruccion" placeholder="Metros cuadrados de construccion" required />
+
+                                    <div>Publicado</div>
+                                    <select name="publish" id="publish" className="mb-3">
+                                        <option value="true"> Publicar  </option>
+                                        <option value="false"> No Publicar  </option>
+                                    </select>
+
+                                    <div>WhatsApp</div>
+
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text" id="basic-addon1">+58</span>
+                                        </div>
+                                        <input onChange={(e) => handleWs(e)} required type="number" className={wsAlert ? "form-control border border-danger " : "form-control border border-dark "} placeholder="Numero de whatsapp del vendedor" aria-label="Username" aria-describedby="basic-addon1" name="ws" id="ws" />
+                                    </div>
+
+                                    {wsAlert && <div className="alert alert-warning" role="alert">
+                                        {wsAlert}
+                                    </div>}
+
+                                    <div>Telefono</div>
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <span className="input-group-text" id="basic-addon1">+58</span>
+                                        </div>
+                                        <input onChange={(e) => handleTel(e)} required type="number" className={telAlert ? "form-control border border-danger " : "form-control border border-dark "} placeholder="Numero de telefono del vendedor" aria-label="Username" aria-describedby="basic-addon1" name="tel" id="tel" />
+                                    </div>
+
+                                    {telAlert && <div className="alert alert-warning" role="alert">
+                                        {telAlert}
+                                    </div>}
+
                                 </div>
                                 <div className="py-4">
                                     <button className="btn w-100 btn-warning btn-lg mb-3 px-5"> <i className="bi-archive" /> Guardar y Continuar </button>

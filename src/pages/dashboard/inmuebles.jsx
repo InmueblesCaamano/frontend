@@ -2,19 +2,24 @@ import { Link } from 'react-router-dom'
 import '../../css/inmueble.css'
 import { useBulidingStore } from '../../store/buildingStore'
 import municipios from '../../services/ubicaciones'
-import useBuilding from '../../hooks/useBuilding'
 import { useNavigate } from 'react-router-dom'
+import { useModalDeleteStore } from '../../store/modalDeleteStore'
+import ModalDelete from './modalDelete'
+import useBuilding from '../../hooks/useBuilding'
+
 const Inmuebles = () => {
+    
+    const { setPublishState } = useBuilding()
+    const { setModalDelete, setId } = useModalDeleteStore()
     const navigate = useNavigate()
-    const { deleteBuilding } = useBuilding()
+
     const { buildings } = useBulidingStore()
 
-    const redirect = (item) => {
-        navigate(`/addimages/${item._id}/${item.precio}/${item.municipios}/${item.parroquias}`)
-        //addimages/656dec2b13bb5626374d342e/4/6/Adrián
-    }
-    /*  const urlImages = './files/' */
+    const redirect = (item) => navigate(`/addimages/${item._id}/${item.precio}/${item.municipios}/${item.parroquias}`)
+
+
     return (<div className="container-fluid p-2 inmuebles-body">
+        <ModalDelete />
         <div className="bg-white p-3 text-center mb-2" >
             <Link className='decoration-none' to='/agregar'>
                 <div className='btn-agregar-inmueble'>
@@ -86,8 +91,10 @@ const Inmuebles = () => {
                             </div>
                         </div>
                         <div className='col-2 p-3'>
-                            <button onClick={() => deleteBuilding(item._id)} className='btn btn-danger' > Eliminar esta propiedad </button>
+                            <button onClick={() => { setModalDelete(true); setId(item._id) }} className='btn btn-danger w-100 mb-3' > Eliminar esta propiedad </button>
                             {/*  <button className='btn btn-primary w-100'> Editar </button> */}
+
+                            {item.publish ? <button onClick={() => setPublishState(item._id)} className='btn btn-warning w-100'> Publicado </button> : <button onClick={() => setPublishState(item._id)} className='btn btn-default border border-danger w-100'> No Visible </button>}
                         </div>
                     </div>)
                 })}

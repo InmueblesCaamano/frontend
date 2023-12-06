@@ -1,4 +1,4 @@
-import ws from '../../public/img/logo-ws.svg';
+import ws from '/img/logo-ws.svg';
 const WhatsappButton = () => {
     return (
         <a href='#' onClick={() => window.open('https://wa.me/+584248261631', '_blank')} className='ws-button'>

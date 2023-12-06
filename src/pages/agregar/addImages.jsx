@@ -1,103 +1,67 @@
 import request from "../../services/request"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import municipios from "../../services/ubicaciones"
-import LoadImages from "../../components/loadImages/loadImages"
+/*import LoadImages from "../../components/loadImages/loadImages" */
 import useLoadingStore from "../../store/loadingStore"
 import { useParams } from "react-router-dom";
 import { ApiUrl } from "../../services/apiurl"
-import useInitApp from "../../hooks/useInitApp"
+const imgbb = "https://api.imgbb.com/1/upload?key=7931846fbc1c51d230a5ea5e92600423"
+
 const AddImages = () => {
-    const { initApp } = useInitApp()
     const { id, precio, municipio, parroquia } = useParams()
 
     const { setLoading } = useLoadingStore()
-    /* const { building = { municipios: 1, parroquias: "", precio: 0 } } = useBulidingStore() */
-    const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/tiff'];
+    const allowedImageTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/tiff']
+    /* const [errorMessage, setErrorMessage] = useState('') */
+    const [images, setImages] = useState([]);
 
-    const [previewImage1, setPreviewImage1] = useState(null);
-    const [previewImage2, setPreviewImage2] = useState(null);
-    const [previewImage3, setPreviewImage3] = useState(null);
-    const [previewImage4, setPreviewImage4] = useState(null);
-    const [previewImage5, setPreviewImage5] = useState(null);
-    const [previewImage6, setPreviewImage6] = useState(null);
+    const getBuilding = async () => {
+        const url = ApiUrl + '/buildings/' + id
+        const building = await request.get(url)
+        const images = building.body.images
+        setImages(images)
 
-    const [errorMessage1, setErrorMessage1] = useState('');
-    const [errorMessage2, setErrorMessage2] = useState('');
-    const [errorMessage3, setErrorMessage3] = useState('');
-    const [errorMessage4, setErrorMessage4] = useState('');
-    const [errorMessage5, setErrorMessage5] = useState('');
-    const [errorMessage6, setErrorMessage6] = useState('');
+    }
 
-    const handleImageChange = async (e, setPreview, setErrorMessage, imgIndex) => {
-        setLoading(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => { getBuilding() }, [])
+
+    const addNewImage = async (e) => {
         const file = e.target.files[0]
-        const imgbb = "https://api.imgbb.com/1/upload?key=7931846fbc1c51d230a5ea5e92600423"
+        if (!file || !allowedImageTypes.includes(file.type)) return
+
         const data = new FormData()
         data.append('image', file)
 
-        if (file && allowedImageTypes.includes(file.type)) {
-            setErrorMessage('')
-            try {
-                const response = await fetch(imgbb, {
-                    method: 'POST',
-                    body: data,
-                })
-                const responseData = await response.json()
-                const url = responseData.data.url
-                console.log(imgIndex)
-                const body = { url }
-                const serverResponse = await request.post(ApiUrl + '/upload/' + id, body)
-                if (serverResponse) {
-                    await initApp()
-                } else {
-                    alert('Ocurrio un error')
-                }
-
-            } catch (error) {
-                setLoading(false)
+        try {
+            setLoading(true)
+            const response = await fetch(imgbb, {
+                method: 'POST',
+                body: data,
+            })
+            const responseData = await response.json()
+            const body = { url: responseData.data.url }
+            const serverResponse = await request.post(ApiUrl + '/upload/single/' + id, body)
+            if (serverResponse.status) {
+                await getBuilding()
+            } else {
+                alert('Ocurrio un error1')
             }
-
-            const reader = new FileReader();
-            reader.onload = () => {
-                setPreview(reader.result);
-            };
-            reader.readAsDataURL(file);
-        } else {
-            setPreview(null);
-            setErrorMessage('Por favor, selecciona una imagen válida (JPEG, PNG o GIF).');
+            setLoading(false)
+        } catch (error) {
+            alert('Ocurrio un error2')
+            setLoading(false)
         }
-        setLoading(false)
     }
 
-    /* const handleUpload = () => {
-        if (selectedImage1) {
-           
-            const formData = new FormData()
-            formData.append('image', selectedImage1)
-            formData.append('image', selectedImage2)
-            formData.append('image', selectedImage3)
-            formData.append('image', selectedImage4)
-            formData.append('image', selectedImage5)
-            formData.append('image', selectedImage6)
-
-            // 'http://localhost:4000/api/v1/upload/'
-            fetch(ApiUrl + "/upload/" + building._id, {
-                method: 'POST',
-                body: formData,
-            })
-                .then(res => res.json())
-                .then(data => {
-                    console.log('Imágenes cargadas con éxito:', data);
-                    alert('Imagenes cargadas con exito')
-                })
-                .catch(error => {
-                    alert('Error al cargar las imagenes')
-                    console.error('Error al cargar las imágenes:', error);
-                })
-        } else {
-            alert('Debe seleccionar almenos 1 imagen')
-        }
-    } */
+    const deleteOneImage = async (index) => {
+        setLoading(true)
+        const url = ApiUrl + '/buildings/deleteone/' + id + '/' + index
+        const res = await request.delete(url)
+        console.log(res)
+        getBuilding()
+        setLoading(false)
+    }
 
     return (<>
         <div className="bg-dark py-4">.</div>
@@ -115,21 +79,32 @@ const AddImages = () => {
                                         <h2 className="text-primary" >${precio && precio}</h2>
                                     </div>
                                     <div>
-                                        <button onClick={()=>window.location.href = '/'+id} className="btn btn-primary btn-lg"> Guardar </button>
+                                        <button onClick={() => window.location.href = '/' + id} className="btn btn-primary btn-lg"> Guardar </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-12">
-                            <div className="gridImages">
-                                <LoadImages imgIndex={0} labelName="file-input1" setPreviewImage={setPreviewImage1} setErrorMessage={setErrorMessage1} previewImage={previewImage1} errorMessage={errorMessage1} handleImageChange={handleImageChange} />
-                                <LoadImages imgIndex={1} labelName="file-input2" setPreviewImage={setPreviewImage2} setErrorMessage={setErrorMessage2} previewImage={previewImage2} errorMessage={errorMessage2} handleImageChange={handleImageChange} />
-                                <LoadImages imgIndex={2} labelName="file-input3" setPreviewImage={setPreviewImage3} setErrorMessage={setErrorMessage3} previewImage={previewImage3} errorMessage={errorMessage3} handleImageChange={handleImageChange} />
-                                <LoadImages imgIndex={3} labelName="file-input4" setPreviewImage={setPreviewImage4} setErrorMessage={setErrorMessage4} previewImage={previewImage4} errorMessage={errorMessage4} handleImageChange={handleImageChange} />
-                                <LoadImages imgIndex={4} labelName="file-input5" setPreviewImage={setPreviewImage5} setErrorMessage={setErrorMessage5} previewImage={previewImage5} errorMessage={errorMessage5} handleImageChange={handleImageChange} />
-                                <LoadImages imgIndex={5} labelName="file-input6" setPreviewImage={setPreviewImage6} setErrorMessage={setErrorMessage6} previewImage={previewImage6} errorMessage={errorMessage6} handleImageChange={handleImageChange} />
+                        <div className="col-12" >
+                            <div className="grid pb-5">
+                                {images.length > 0 && images.map((image, index) => {
+                                    return (<div className="itemgrid" key={index}>
+                                        <div className="imagesUpload" >
+                                            <img className='preview-img w-100 pb-4' src={image} alt="" />
+                                            <div onClick={() => deleteOneImage(index)} className="eraseImage"> x </div>
+                                        </div>
+                                    </div>
+                                    )
+                                })}
+                                <div className="itemgrid">
+                                    <div className="imagesUpload2">
+                                        <label htmlFor='newImage' className="d-flex pointer justify-content-center align-items-center w-100 h-100">
+                                            + <i className="bi-image" />
+                                        </label>
+                                    </div>
+                                </div>
+                                <input onChange={(e) => addNewImage(e)} type="file" name="newImage" id="newImage" style={{ display: "none" }} />
                             </div>
                         </div>
                     </div>
