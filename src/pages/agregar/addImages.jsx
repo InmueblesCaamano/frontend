@@ -5,9 +5,12 @@ import municipios from "../../services/ubicaciones"
 import useLoadingStore from "../../store/loadingStore"
 import { useParams } from "react-router-dom";
 import { ApiUrl } from "../../services/apiurl"
+import { useNavigate } from "react-router-dom";
 const imgbb = "https://api.imgbb.com/1/upload?key=7931846fbc1c51d230a5ea5e92600423"
 
 const AddImages = () => {
+
+    const navigate = useNavigate()
     const { id, precio, municipio, parroquia } = useParams()
 
     const { setLoading } = useLoadingStore()
@@ -79,7 +82,7 @@ const AddImages = () => {
                                         <h2 className="text-primary" >${precio && precio}</h2>
                                     </div>
                                     <div>
-                                        <button onClick={() => window.location.href = '/' + id} className="btn btn-primary btn-lg"> Guardar </button>
+                                        <button onClick={() => navigate('/detallado/' + id)} className="btn btn-primary btn-lg"> Guardar </button>
                                     </div>
                                 </div>
                             </div>
