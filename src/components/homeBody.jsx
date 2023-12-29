@@ -34,11 +34,15 @@ const HomeBody = ({ tipo }) => {
                         {list[tipo] && <> {list[tipo]} en Margarita</>}
                     </h4>
                 </div>
-                {actBuildings && actBuildings.length > 0 && actBuildings.filter(i => i.publish).map((item, index) => {
+                {actBuildings && actBuildings.length > 0 ? actBuildings.filter(i => i.publish).map((item, index) => {
                     return (<div key={index} className='col-10 offset-1 offset-sm-0 col-md-6 col-lg-3 mb-4 '>
                         <Article item={item} />
-                    </div>)
-                })}
+                    </div>) 
+                }) : <div className="text-center my-5">
+                    No se encontraron resultados
+                </div>
+            
+            }
 
             </div>
         </div>

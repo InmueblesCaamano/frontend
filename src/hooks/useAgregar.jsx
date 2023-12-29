@@ -60,29 +60,25 @@ const useAgregar = () => {
     const [wsAlert, setWsAlert] = useState()
     const [telAlert, setTelAlert] = useState()
 
-    const handleTel = (e) => {
-        const tel = e.target.value
-        const firstNumber = tel.split('')[0]
-        if (firstNumber == 0) {
-            setTelAlert('No debe incluir el cero (0) , ejemplo: 4141220527')
-        } else {
-            setTelAlert('')
-        }
-    }
-
-    const handleWs = (e) => {
-        const ws = e.target.value
-        const firstNumber = ws.split('')[0]
-        if (firstNumber == 0) {
+    const handleTel = ({ target }) => {
+        const { value, name } = target
+        const firstNumber = Number(value.split('')[0])
+        if (name === 'ws' && firstNumber === 0) {
             setWsAlert('No debe incluir el cero (0) , ejemplo: 4141220527')
-        } else {
-            setWsAlert('')
+            return
         }
+        if (name === 'tel' && firstNumber === 0) {
+            setTelAlert('No debe incluir el cero (0) , ejemplo: 4141220527')
+            return
+        }
+        setWsAlert('')
+        setTelAlert('')
+        
     }
 
     return {
-        sendForm, handleParroquias, handleTel, handleWs,
-        wsAlert, setWsAlert, telAlert, setTelAlert,parroquias
+        sendForm, handleParroquias, handleTel,
+        wsAlert, setWsAlert, telAlert, setTelAlert, parroquias
     }
 }
 

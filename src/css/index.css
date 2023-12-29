@@ -4,6 +4,9 @@
   --gray: #b1b1b1;
   --blue-light: rgb(56, 92, 159);
 }
+.hoverNone:hover{
+  cursor: not-allowed;
+}
 
 body {
   background-color: #ebebeb !important;
@@ -79,17 +82,16 @@ body {
   width: 100vw;
 }
 
-
 .NavbarCollapse {
-  padding: 60px 30px 30px 40px;
-  background-color: rgb(225, 225, 225);
-  z-index: 9999;
-  position: absolute;
+  padding: 100px 30px 30px 40px;
+  background-color: rgb(229, 233, 231);
+  z-index: 1;
+  position: relative;
   width: 100%;
 }
 
 .closeNavbar-collapse {
-  position: fixed;
+  position: absolute;
   top: 10px;
   right: 10px;
   font-size: 30px;
@@ -100,6 +102,7 @@ body {
   align-items: center;
   border-radius: 6px;
   border: 1px solid var(--gray);
+  z-index:1;
 }
 
 .closeNavbar-collapse i {
@@ -261,7 +264,7 @@ p {
 }
 
 .navPosition {
-  z-index: 1 !important;
+  z-index: 1;
 }
 
 .label-form {
@@ -360,4 +363,3 @@ p {
   padding: 30px 60px;
   border-radius: 5px;
 }
-

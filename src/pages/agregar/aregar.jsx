@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-key */
 import municipios from "../../services/ubicaciones"
 import useAgregar from "../../hooks/useAgregar"
 const Agregar = () => {

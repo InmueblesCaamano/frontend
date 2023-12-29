@@ -8,7 +8,7 @@ import ModalDelete from './modalDelete'
 import useBuilding from '../../hooks/useBuilding'
 
 const Inmuebles = () => {
-    
+
     const { setPublishState } = useBuilding()
     const { setModalDelete, setId } = useModalDeleteStore()
     const navigate = useNavigate()
@@ -92,9 +92,11 @@ const Inmuebles = () => {
                         </div>
                         <div className='col-2 p-3'>
                             <button onClick={() => { setModalDelete(true); setId(item._id) }} className='btn btn-danger w-100 mb-3' > Eliminar esta propiedad </button>
-                            {/*  <button className='btn btn-primary w-100'> Editar </button> */}
+                            <Link to={'/editar/' + item._id} >
+                                <button className='btn btn-primary w-100'> Editar </button>
+                            </Link>
 
-                            {item.publish ? <button onClick={() => setPublishState(item._id)} className='btn btn-warning w-100'> Publicado </button> : <button onClick={() => setPublishState(item._id)} className='btn btn-default border border-danger w-100'> No Visible </button>}
+                            {item.publish ? <button onClick={() => setPublishState(item._id)} className='btn btn-warning w-100 mt-3'> Publicado </button> : <button onClick={() => setPublishState(item._id)} className='btn mt-3 btn-default border border-danger w-100'> No Visible </button>}
                         </div>
                     </div>)
                 })}

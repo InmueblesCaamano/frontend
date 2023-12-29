@@ -7,6 +7,7 @@ import Agregar from "./pages/agregar/aregar"
 import AddImages from "./pages/agregar/addImages"
 import Deatallado from "./pages/detallado/detallado"
 import Propiedades from "./pages/propiedades/propiedades"
+import Editar from "./pages/editar/editar"
 const Router = () => {
     return (<>
         <Routes>
@@ -20,6 +21,7 @@ const Router = () => {
             <Route path="/detallado/:id" element={<Deatallado />} />
             <Route path="/:id" element={<Deatallado />} />
             <Route path="/propiedades/:tipo" element={<Propiedades />} />
+            <Route path="/editar/:id" element={<Editar />} />
             <Route path="/*" element={<div className="404">404 Not found</div>} />
         </Routes>
     </>)
