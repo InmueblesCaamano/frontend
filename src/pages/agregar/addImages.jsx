@@ -60,8 +60,7 @@ const AddImages = () => {
     const deleteOneImage = async (index) => {
         setLoading(true)
         const url = ApiUrl + '/buildings/deleteone/' + id + '/' + index
-        const res = await request.delete(url)
-        console.log(res)
+        await request.delete(url)
         getBuilding()
         setLoading(false)
     }

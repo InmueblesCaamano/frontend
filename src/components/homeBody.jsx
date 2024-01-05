@@ -30,6 +30,7 @@ const HomeBody = ({ tipo }) => {
         <div className='container-fluid px-5 mt-4 mb-5'>
             <div className='row'>
                 <div className="col-12 pt-2">
+                    
                     <h4>
                         {list[tipo] && <> {list[tipo]} en Margarita</>}
                     </h4>
@@ -41,9 +42,7 @@ const HomeBody = ({ tipo }) => {
                 }) : <div className="text-center my-5">
                     No se encontraron resultados
                 </div>
-            
             }
-
             </div>
         </div>
     </>)

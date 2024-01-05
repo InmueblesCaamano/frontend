@@ -13,6 +13,7 @@ const App = () => {
   const initApp = useInitApp()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { initApp() }, [])
+
   return (
     <>
       <AlertModal />

@@ -4,11 +4,15 @@ import { ApiUrl } from "../../services/apiurl";
 import { Link, useParams } from "react-router-dom";
 import getMunicipio from "../../services/getMunicipio";
 import useLoadingStore from "../../store/loadingStore"
+import money from "../../services/money";
+import ImgModal from "../../components/modals/imgModal";
+import useCarouselStore from "../../store/carouselStore";
 const Deatallado = () => {
+    const { actualPicture, setPictures, setActualPicture, setVisible } = useCarouselStore()
     const { setLoading } = useLoadingStore();
     const { id } = useParams()
     const [building, setBuilding] = useState()
-    const [actualPicture, setActualPicture] = useState()
+    /* const [actualPicture, setActualPicture] = useState() */
     const [actualPage, setActualPage] = useState(0)
 
     const getBuilding = async (id) => {
@@ -17,9 +21,8 @@ const Deatallado = () => {
         if (!response.status) {
             setActualPage(1)
         } else {
-
             setBuilding(response.body)
-            setActualPicture(response.body.images[0])
+            setPictures(response.body.images)
         }
         setLoading(false)
     }
@@ -39,19 +42,20 @@ const Deatallado = () => {
 
     return (
         <>
+            <ImgModal />
             <div className="bg-dark p-4 ">.</div>
             <div className="container-fluid mt-4 px-5">
                 <div className="row">
                     <div className="col-12 col-md-6">
                         <div className="actualPicture">
-                            {building?.images.length > 0 ? <>
-                                <img className="imgDetallado" src={actualPicture} />
-                            </> : <> Sin imagen </>}
+                            {building?.images.length > 0 ? <div onClick={() => setVisible(true)} className="hoverPicture">
+                                <img className="imgDetallado" src={building?.images[actualPicture]} />
+                            </div> : <> Sin imagen </>}
                         </div>
                         <div className="row px-2">
                             {building?.images && building.images.map((foto, index) => {
                                 return (<div className="col-2 p-2" key={index}>
-                                    <img onClick={() => setActualPicture(foto)} className="imgDisplay" src={foto} />
+                                    <img onClick={() => setActualPicture(index)} className="imgDisplay" src={foto} />
                                 </div>)
                             })}
                         </div>
@@ -60,7 +64,7 @@ const Deatallado = () => {
                         <div className="bg-light text-dark p-4 rounded titleDetallado">
                             <h2>  {building?.parroquias} </h2>
                             <div>  {getMunicipio(building?.municipios)}, Nueva Esparta </div>
-                            <h1 className=" m-0 p-0" > $ {building?.precio} </h1>
+                            <h1 className=" m-0 p-0" > {money(building?.precio)} </h1>
                             <i className="bg-primary text-light p-1 rounded top-left">{building?.tipo} </i>
                         </div>
                         <div className="p-4 bg-white rounded mt-1">

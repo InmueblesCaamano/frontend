@@ -4,9 +4,10 @@
 
 .bgArticle {
     background-color: rgb(255, 255, 255);
-    box-shadow: 8px 8px 8px 8px rgba(117, 117, 117, 0.514);
+    box-shadow: 3px 3px 3px 3px rgba(117, 117, 117, 0.514);
     border-radius: 5px;
 }
+
 .bgArticle:hover{
     cursor: pointer;
 }
