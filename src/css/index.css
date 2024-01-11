@@ -429,3 +429,11 @@ p {
   cursor: pointer;
   background-color: rgb(235, 231, 231) !important;
 }
+.maintenance{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(54, 54, 54);
+  flex-direction: column;
+  height: 100vh;
+}

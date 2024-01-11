@@ -9,21 +9,26 @@ import { useEffect } from 'react'
 import Loading from './components/loading'
 import useInitApp from './hooks/useInitApp'
 import AlertModal from './components/modals/alertModal'
+import Maintenance from './components/maintenance'
+import maintenance from './services/maintenance'
 const App = () => {
   const initApp = useInitApp()
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { initApp() }, [])
-
-  return (
-    <>
-      <AlertModal />
-      <Loading />
-      <NavBar />
-      <Router />
-      <Notifications />
-      <WhatsappButton />
-    </>
-  )
+  if (maintenance) {
+    return <Maintenance />
+  } else {
+    return (
+      <>
+        <AlertModal />
+        <Loading />
+        <NavBar />
+        <Router />
+        <Notifications />
+        <WhatsappButton />
+      </>
+    )
+  }
 }
 export default App
 
