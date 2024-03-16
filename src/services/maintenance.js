@@ -1,2 +1,2 @@
-const maintenance = true
+const maintenance = false
 export default maintenance

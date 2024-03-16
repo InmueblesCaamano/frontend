@@ -117,4 +117,3 @@ const AddImages = () => {
 }
 
 export default AddImages
-
