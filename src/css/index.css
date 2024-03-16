@@ -21,8 +21,7 @@ body {
 }
 
 .background-img {
-  min-height: 100vh;
-  padding-bottom: 100px;
+  height: 500px;
   background: linear-gradient(rgba(0, 0, 0, 0.452), rgba(0, 0, 0, 0.24)), url('https://www.inmueblescaamano.com/img/bg.webp');
   background-position: center;
   background-repeat: no-repeat;
@@ -169,10 +168,6 @@ body {
   background-color: var(--yellow);
   border: none;
   padding: 5px 30px;
-}
-
-.land {
-  text-align: center;
 }
 
 .principal {
