@@ -2,11 +2,8 @@ export default function Carousel() {
     return (<div className='background-img'>
         <div className='land'>
             <div className='imgWrapper'>
-                <div className="circle">
-                    <img src='/img/logo.png' width={"180"} height={"180"} alt='logo' className="img-Logo"/>
-                </div>
+                <img src='/img/logoTransparent.png' alt='logo' className="" width={'100%'} />
             </div>
-            <h1 className='mb-3 home-title text-white'>Ecuentra la propiedad de tus sueños</h1>
             {/* <div className="container bg-light p-4 wrapFinder">
                 <div className="row">
                     <div className="col-12 col-lg-2">

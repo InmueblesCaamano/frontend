@@ -4,7 +4,8 @@
   --gray: #b1b1b1;
   --blue-light: rgb(56, 92, 159);
 }
-.hoverNone:hover{
+
+.hoverNone:hover {
   cursor: not-allowed;
 }
 
@@ -15,14 +16,14 @@ body {
   padding: 0px;
 }
 
-.text-gray{
+.text-gray {
   color: gray;
 }
 
 .background-img {
   min-height: 100vh;
   padding-bottom: 100px;
-  background: linear-gradient(rgba(0, 0, 0, 0.452), rgba(0, 0, 0, 0.24)), url('https://www.inmueblescaamano.com/img/bg2.webp');
+  background: linear-gradient(rgba(0, 0, 0, 0.452), rgba(0, 0, 0, 0.24)), url('https://www.inmueblescaamano.com/img/bg.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -30,11 +31,13 @@ body {
   align-items: center;
   justify-content: center;
 }
-.between{
+
+.between {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .navegador {
   display: flex;
   justify-content: space-between;
@@ -46,10 +49,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 300px;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.137);
+  border-radius: 50%;
+  height: 300px;
 }
 
 .img-Logo {
-  width: 200px;
+  width: 300px;
 }
 
 .circle {
@@ -102,7 +110,7 @@ body {
   align-items: center;
   border-radius: 6px;
   border: 1px solid var(--gray);
-  z-index:1;
+  z-index: 1;
 }
 
 .closeNavbar-collapse i {
@@ -350,37 +358,41 @@ p {
   align-items: center;
 }
 
-.body-admin-modal{
+.body-admin-modal {
   background-color: rgb(255, 255, 255);
   padding: 30px 60px;
   border-radius: 5px;
 }
-.input-border{
+
+.input-border {
   border: 2px solid rgb(67, 67, 67);
 }
 
-.body-admin-modal-delete{
+.body-admin-modal-delete {
   padding: 30px 60px;
   border-radius: 5px;
 }
 
-.hoverPicture:hover{
+.hoverPicture:hover {
   cursor: pointer;
 }
-.actualPicture-modal{
+
+.actualPicture-modal {
   max-width: 100%;
   max-height: 100%;
 }
-.body-img-modal{
+
+.body-img-modal {
   display: flex;
   align-items: center;
   justify-content: center;
-  color:white;
+  color: white;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
 }
-.close-btn-modal-img{
+
+.close-btn-modal-img {
   margin-top: 20px;
   font-size: large;
 }
@@ -398,16 +410,19 @@ p {
   left: 0px;
 }
 
-.close-btn-modal-img{
+.close-btn-modal-img {
   bottom: 10px;
 }
-.ant-btn-modal-img{
+
+.ant-btn-modal-img {
   left: 20px;
 }
-.sig-btn-modal-img{
+
+.sig-btn-modal-img {
   right: 40px;
 }
-.laterals{
+
+.laterals {
   line-height: 30px;
   font-size: 40px;
   margin-top: -5px;
@@ -418,18 +433,20 @@ p {
   align-items: center;
   justify-content: center;
 }
-.modal-btn{
+
+.modal-btn {
   background-color: rgba(223, 223, 223, 0.795);
   color: rgb(44, 44, 44);
   position: absolute;
   border-radius: 5px;
 }
 
-.modal-btn:hover{
+.modal-btn:hover {
   cursor: pointer;
   background-color: rgb(235, 231, 231) !important;
 }
-.maintenance{
+
+.maintenance {
   display: flex;
   align-items: center;
   justify-content: center;
