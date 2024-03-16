@@ -22,7 +22,7 @@ body {
 
 .background-img {
   height: 500px;
-  background: linear-gradient(rgba(0, 0, 0, 0.452), rgba(0, 0, 0, 0.24)), url('https://www.inmueblescaamano.com/img/bg.webp');
+  background: linear-gradient(rgba(0, 0, 0, 0.356), rgba(0, 0, 0, 0.062), rgba(0, 0, 0, 0.062)), url('https://roraimainmuebles.vercel.app/img/bg.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -50,7 +50,7 @@ body {
   justify-content: center;
   width: 300px;
   padding: 30px;
-  background-color: rgba(0, 0, 0, 0.137);
+  background-color: rgba(0, 0, 0, 0.096);
   border-radius: 50%;
   height: 300px;
 }

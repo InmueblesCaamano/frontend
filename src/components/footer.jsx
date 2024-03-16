@@ -3,7 +3,7 @@ export default function Footer() {
         <div>
             <div className="bg-dark">
                 <div className="container py-5 text-light">
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-12 pb-4">
                             <div className="text-center pb-4">
                                 <h2>Encuentranos con google map</h2>
@@ -16,8 +16,13 @@ export default function Footer() {
                                 referrerPolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
-                    </div>
+                    </div> */}
 
+                    <div className="row mt-4">
+                        <div className="col-12 text-center">
+                            Publica tu inmueble con nosotros
+                        </div>
+                    </div>
                     <div className="row mt-4">
                         <div className="col-12 col-md-6 text-md-center text-lg-end text-center">
                             <h2>
@@ -26,15 +31,9 @@ export default function Footer() {
                             <h4>Nosotros</h4>
                         </div>
                         <div className="col-12 col-md-6 text-center text-md-start">
-                            <a className="numberContact w-100" href="tel:+584248261631">
-                                <i> <i className="bi bi-telephone" /> +58 424-8261631</i>
+                            <a className="numberContact w-100" href="tel:+584141220527">
+                                <i> <i className="bi bi-telephone" /> +58 4141220527</i>
                             </a>
-                        </div>
-                    </div>
-                    <div className="row mt-4">
-                        <div className="col-12 text-center">
-                            <i className="bi bi-pin-map px-2" />
-                            Nueva Esparta, Margarita, Centro comercial Bayside Local 1-03
                         </div>
                     </div>
                 </div>
