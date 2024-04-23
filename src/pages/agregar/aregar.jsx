@@ -1,9 +1,18 @@
 import municipios from "../../services/ubicaciones"
 import useAgregar from "../../hooks/useAgregar"
+import venezuela from "../../services/venezuela.json"
+import { useState } from "react"
 const Agregar = () => {
 
     const { sendForm, handleParroquias, handleTel, handleWs,
         wsAlert, telAlert, parroquias } = useAgregar()
+
+    const [estado, setEstado] = useState()
+
+    const selectState = (e) => {
+        console.log(e.target.value)
+        setEstado(e.target.value)
+    }
 
     return (<>
         <div className="bg-dark text-light pt-5 px-3 pb-2">
@@ -20,6 +29,7 @@ const Agregar = () => {
                                 <div className="border p-3 rounded bg-gray">
                                     <div>
                                         <div>Tipo</div>
+
                                         <select name="tipo" id="tipo" className="form-control border-dark mb-3">
                                             <option value=""> Elija un tipo </option>
                                             <option value="casa"> Casa </option>
@@ -29,6 +39,13 @@ const Agregar = () => {
                                             <option value="local"> Local </option>
                                         </select>
                                         <div>Ubicacion </div>
+
+                                        <select onChange={selectState}>
+                                            {venezuela.map((estado, index) => {
+                                                return <option value={index} key={index}> {estado.estado} </option>
+                                            })}
+                                        </select>
+
                                         <select onChange={(e) => handleParroquias(e.target.value)} name="municipios" id="" className="form-control border-dark mb-3">
                                             <option value=""> Elija un municipio </option>
                                             {municipios.map((i, index) => {
